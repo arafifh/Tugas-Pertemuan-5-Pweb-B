@@ -1,29 +1,33 @@
-const nameInput = document.getElementById('name');
-const ageInput = document.getElementById('age');
+const namaInput = document.getElementById('nama');
+const suggestionsDiv = document.getElementById('suggestions');
+const mataKuliahInput = document.getElementById('mata-kuliah');
+const dosenInput = document.getElementById('dosen');
+const registrationForm = document.getElementById('registration-form');
 
-const data = {
+const rekomendasi = {
     "John Doe": {
-        age: "23"
+        mataKuliah: "Dasar Pemrograman",
+        dosen: "Dr. Smith"
     },
     "Jane Smith": {
-        age: "40"
+        mataKuliah: "Sistem Digital",
+        dosen: "Prof. Johnson"
     },
-    // Tambahkan data lainnya di sini
 };
 
-nameInput.addEventListener('input', () => {
-    const inputText = nameInput.value;
+namaInput.addEventListener('input', () => {
+    const inputText = namaInput.value;
     suggestionsDiv.innerHTML = '';
 
     if (inputText.length > 0) {
-        for (const name in data) {
-            if (name.toLowerCase().includes(inputText.toLowerCase())) {
+        for (const nama in rekomendasi) {
+            if (nama.toLowerCase().includes(inputText.toLowerCase())) {
                 const suggestionItem = document.createElement('div');
-                suggestionItem.textContent = name;
+                suggestionItem.textContent = nama;
                 suggestionItem.addEventListener('click', () => {
-                    nameInput.value = name;
-                    mataKuliahInput.value = data[name].mataKuliah;
-                    dosenInput.value = data[name].dosen;
+                    namaInput.value = nama;
+                    mataKuliahInput.value = rekomendasi[nama].mataKuliah;
+                    dosenInput.value = rekomendasi[nama].dosen;
                     suggestionsDiv.style.display = 'none';
                 });
                 suggestionsDiv.appendChild(suggestionItem);
@@ -36,7 +40,7 @@ nameInput.addEventListener('input', () => {
 });
 
 document.addEventListener('click', (event) => {
-    if (event.target !== nameInput && event.target !== suggestionsDiv) {
+    if (event.target !== namaInput && event.target !== suggestionsDiv) {
         suggestionsDiv.style.display = 'none';
     }
 });
@@ -45,7 +49,7 @@ registrationForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     // Periksa apakah semua kolom telah diisi
-    if (!nameInput.value || !ageInput.value) {
+    if (!namaInput.value || !nimInput.value || !mataKuliahInput.value || !dosenInput.value) {
         alert('Mohon isi semua kolom!');
     }
 });
